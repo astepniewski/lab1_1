@@ -22,9 +22,7 @@ public class OfferItem {
 
 	private int quantity;
 
-	private BigDecimal totalCost;
-
-	private String currency;
+	private Money totalCost;
 
 	private ProductSnapeshot product;
 
@@ -41,12 +39,12 @@ public class OfferItem {
 		this.quantity = quantity;
 		this.discount = discount;
 
-		BigDecimal discountValue = new BigDecimal(0);
+		Money discountValue = new Money(new BigDecimal(0));
 		if (discount != null)
 			discountValue = discountValue.subtract(discount.getValue());
 
 		this.totalCost = product.getProductPrice()
-				.multiply(new BigDecimal(quantity)).subtract(discountValue);
+				.multiply(new Money(new BigDecimal(quantity))).subtract(discountValue);
 	}
 
 	public int getQuantity() {
@@ -110,7 +108,7 @@ public class OfferItem {
 		if (quantity != other.quantity)
 			return false;
 
-		BigDecimal max, min;
+		Money max, min;
 		if (totalCost.compareTo(other.totalCost) > 0) {
 			max = totalCost;
 			min = other.totalCost;
@@ -119,8 +117,8 @@ public class OfferItem {
 			min = totalCost;
 		}
 
-		BigDecimal difference = max.subtract(min);
-		BigDecimal acceptableDelta = max.multiply(new BigDecimal(delta / 100));
+		Money difference = max.subtract(min);
+		Money acceptableDelta = max.multiply(new Money(new BigDecimal(delta / 100)));
 
 		return acceptableDelta.compareTo(difference) > 0;
 	}

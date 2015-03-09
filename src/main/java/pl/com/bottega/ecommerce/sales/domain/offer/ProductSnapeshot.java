@@ -7,7 +7,7 @@ public class ProductSnapeshot {
 	// product
 	private String Id;
 
-	private BigDecimal Price;
+	private Money Price;
 
 	private String Name;
 
@@ -17,7 +17,7 @@ public class ProductSnapeshot {
 	
 	private String currency;
 
-	public ProductSnapeshot(String productId, BigDecimal productPrice,
+	public ProductSnapeshot(String productId, Money productPrice,
 			String productName, Date productSnapshotDate, String productType) {
 		this.Id = productId;
 		this.Price = productPrice;
@@ -30,7 +30,7 @@ public class ProductSnapeshot {
 		return Id;
 	}
 
-	public BigDecimal getProductPrice() {
+	public Money getProductPrice() {
 		return Price;
 	}
 
